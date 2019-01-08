@@ -1,5 +1,7 @@
 # This is a game about hero and the monster
 
+import random
+
 # Hero class
 class satpamPasar(object):
 	kekuatan = 150
@@ -41,21 +43,21 @@ class preman(object):
 	kekuatan = 50
 	penyerangan = 5
 	pertahanan = 10
-	kelangkaan = 0
+	kelangkaan = 1
 
 class jambret(object):
 	intro = "Ada RX King berwarna hitam."
 	kekuatan = 60
 	penyerangan = 6
 	pertahanan = 12
-	kelangkaan = 1
+	kelangkaan = 2
 
 class orgil(object):
 	intro = "Tolong ada orang gila ga pake celana..."
 	kekuatan = 70
 	penyerangan = 10
 	pertahanan = 15
-	kelangkaan = 2
+	kelangkaan = 3
 
 # inventory area
 def inventoryWipe():
@@ -67,7 +69,7 @@ def inventoryShow():
 	print("Kamu memiliki benda ini dalam inventori : ")
 	file.open("inventory.txt", "r")
 	contents = file.read()
-	contents = contents.split(", ")
+	contents = contents.split(",")
 	print(contents)
 	
 	length = len(contents)-1
@@ -77,7 +79,7 @@ def inventoryShow():
 def lootCheck(lootX):
 	file = open("inventory.txt", "r")
 	contents = file.read()
-	contents = contents.split(", ")
+	contents = contents.split(",")
 	if lootX in contents:
 		print("Sudah punya. Tidak bisa ambil lagi.")
 	else:
@@ -85,7 +87,7 @@ def lootCheck(lootX):
 
 def inventory(lootX):
 	file = open("inventory.txt", "a")
-	file.write(str(lootX + ", "))
+	file.write(str(lootX + ","))
 	file.close()
 
 def inventoryDelete(decisionX):
@@ -104,8 +106,51 @@ def inventoryDelete(decisionX):
 		file = open("inventory.txt", "w")
 		for x in range (0, len(contents)):
 			print(contents[x])
-			file.write(contents[x] + ", ")
+			file.write(contents[x] + ",")
 		file.close()
+
+def loot(enemyList, enemyNo):
+	file = open("loot.txt", "r")
+	lootTableCommon = file.readline()
+	lootTableUnCommon = file.readline()
+	lootTableRare = file.readline()
+	lootTableUltraRare = file.readline()
+
+	lootTableCommon = lootTableCommon.split(",")
+	lootTableUnCommon = lootTableCommon.split(",")
+	lootTableRare = lootTableCommon.split(",")
+	lootTableUltraRare = lootTableCommon.split(",")
+
+	lootTableCommon = lootTableCommon[:-1]
+	lootTableUnCommon = lootTableCommon[:-1]
+	lootTableRare = lootTableCommon[:-1]
+	lootTableUltraRare = lootTableCommon[:-1]
+
+	global lootX
+
+	if enemyList(enemyNo).rarity == 0:
+		length = len(lootTableCommon)-1
+		lootX = lootTableCommon[random.randint(0, length)]
+
+	elif enemyList(enemyNo).rarity == 1:
+		length = len(lootTableCommon)-1
+		lootX = lootTableCommon[random.randint(0, length)]
+
+	elif enemyList(enemyNo).rarity == 2:
+		length = len(lootTableCommon)-1
+		lootX = lootTableCommon[random.randint(0, length)]
+
+	elif enemyList(enemyNo).rarity == 3:
+		length = len(lootTableCommon)-1
+		lootX = lootTableCommon[random.randint(0, length)]
+
+	else:
+		length = len(lootTableCommon)-1
+		lootX = lootTableCommon[random.randint(0, length)]
+	
+	lootX = str(lootX)
+	print("Musuh menjatuhkan... ", lootX)
+	lootCheck(lootX)
 
 inventoryWipe()
 print("\n \n \nKamu harus menjaga keamanan pasar dari serangan monster!\n \n \n")
