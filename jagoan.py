@@ -11,6 +11,7 @@ class satpamPasar(object):
 	ilmuGaib = 0
 	uang = 0
 	name = "Satpam Pasar"
+	keberuntungan = 10
 
 class pirAngkot(object):
 	kekuatan = 100
@@ -20,6 +21,7 @@ class pirAngkot(object):
 	ilmuGaib = 0
 	uang = 0
 	name = "Sopir Angkot"
+	keberuntungan = 10
 
 class dukun(object):
 	kekuatan = 100
@@ -29,6 +31,7 @@ class dukun(object):
 	ilmuGaib = 140
 	uang = 0
 	name = "Mbah Dukun"
+	keberuntungan = 10
 
 # class bandit
 class copet(object):
@@ -151,6 +154,65 @@ def loot(enemyList, enemyNo):
 	lootX = str(lootX)
 	print("Musuh menjatuhkan... ", lootX)
 	lootCheck(lootX)
+
+def battleState():
+	battleState = 100
+	enemyNo = random.randint(0, 3)
+	enemyList = [copet, preman, jambret, orgil]
+	attackList = [character.kekuatan, character.ilmuGaib, character.jangkauan]
+	print("Ada musuh datang ke pasar...")
+	print("Ajegile, itu adalah seorang ", enemyList[enemyNo], "!!!" )
+	print("Bersiaplah. Apa yang akan dilakukan sekarang \n")
+	decision = int(input("1. Serang! \n2.Lihat isi tas. \n3. Kabur aja lah. Lagi males banget nih."))
+
+	while decision > 3:
+		print("isilah dengan angka 1,2 atau 3.")
+		decision = int(input("1. Serang! \n2.Lihat isi tas. \n3. Kabur aja lah. Lagi males banget nih."))
+
+	while decision == 1:
+		if decision == 1:
+			print("Kamu punya 3 pilihan menyerang")
+			attack = int(input("1. Gagang pohon \n2. Ilmu Gaib \n3. Omelan"))
+			x = attack - 1
+
+			miss = random.randint(0,10) + character.keberuntungan
+
+			if miss > 8:
+				print("Serangannya luput! Musuh jago ngeles dot com")
+				print("Musuh menyerang")
+				print(enemyList[enemyNo], "melukai perasaan, harga diri dan tubuh anda")
+				damage = round(enemyList[enemyNo].attack /character.pertahanan, 2)
+				character.pertahanan = character.pertahanan - damage
+				print("Kekuatan anda saat ini adalah tinggal ", character.pertahanan)
+				if character.pertahanan < 10:
+					print("Sebentar lagi anda mati, karena kekuatan tinggal sedikit. Perbanyaklah amal ibadah.")
+				elif character.pertahanan < 1:
+					print("Anda, jagoan kita meninggal dunia. Innalillahi.")
+					print("GAME OVER")
+					print("tekan keyboard control + C untuk keluar dari game ini dan merenungi makna hidup.")
+
+			else:
+				if attack == 1:
+					damage = round(attackList[x] / enemyList[enemyNo].pertahanan, 2)
+					print("Anda melawan balik dan membuat musuh menjadi berkurang pertahannnya sebanyak: ", damage)
+					enemyList[enemyNo].kekuatan = enemyList[enemyNo].kekuatan - damage
+					print("Kekuatan musuh berkurang. Sekarang tinggal: ", enemyList[enemyNo].kekuatan )
+					if enemyList[enemyNo].pertahanan < 1:
+						print(f"Musuh kita si {enemyList[enemyNo]} meninggal. Hamdalah. Walaupun ia musuh, jangan lupa disholati, sebab ia juga manusia seperti kita.")
+						print("LANJUTKAN PETUALANGAN INI")
+						enemyList[enemyNo].kekuatan = 100
+						battleState = 0
+
+						loot(enemyList[enemyNo])
+
+					else:
+						decision = int(input("1. Serang! \n2.Lihat isi tas. \n3. Kabur aja lah. Lagi males banget nih."))
+						
+
+
+
+
+
 
 inventoryWipe()
 print("\n \n \nKamu harus menjaga keamanan pasar dari serangan monster!\n \n \n")
