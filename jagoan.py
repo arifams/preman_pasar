@@ -194,7 +194,7 @@ def battleState():
 			else:
 				if attack == 1:
 					damage = round(attackList[x] / enemyList[enemyNo].pertahanan, 2)
-					print("Anda melawan balik dan membuat musuh menjadi berkurang pertahannnya sebanyak: ", damage)
+					print("Anda melawan balik dengan gagang pohon dan membuat musuh menjadi berkurang pertahannnya sebanyak: ", damage)
 					enemyList[enemyNo].kekuatan = enemyList[enemyNo].kekuatan - damage
 					print("Kekuatan musuh berkurang. Sekarang tinggal: ", enemyList[enemyNo].kekuatan )
 					if enemyList[enemyNo].pertahanan < 1:
@@ -207,7 +207,43 @@ def battleState():
 
 					else:
 						decision = int(input("1. Serang! \n2.Lihat isi tas. \n3. Kabur aja lah. Lagi males banget nih."))
-						
+				
+				elif attack == 2:
+					damage = round(attackList[x] / enemyList[enemyNo].pertahanan, 2)
+					print("Anda melawan balik dengan Ilmu Gaib RawaRontek dan membuat musuh menjadi berkurang pertahannnya sebanyak: ", damage)
+					enemyList[enemyNo].kekuatan = enemyList[enemyNo].kekuatan - damage
+					print("Kekuatan musuh berkurang. Sekarang tinggal: ", enemyList[enemyNo].kekuatan )
+					if enemyList[enemyNo].pertahanan < 1:
+						print(f"Musuh kita si {enemyList[enemyNo]} meninggal. Hamdalah. Walaupun ia musuh, jangan lupa disholati, sebab ia juga manusia seperti kita.")
+						print("LANJUTKAN PETUALANGAN INI")
+						enemyList[enemyNo].kekuatan = 100
+						battleState = 0
+
+						loot(enemyList[enemyNo])
+
+					else:
+						decision = int(input("1. Serang! \n2.Lihat isi tas. \n3. Kabur aja lah. Lagi males banget nih."))
+
+				elif attack == 3:
+					damage = round(attackList[x] / enemyList[enemyNo].pertahanan, 2)
+					print("Anda melawan balik dengan Omelan dan Bisikan Maut dan membuat musuh malesbanget dan bete. Sehingga pertahannnya tinggal: ", damage)
+					enemyList[enemyNo].kekuatan = enemyList[enemyNo].kekuatan - damage
+					print("Kekuatan musuh berkurang. Sekarang tinggal: ", enemyList[enemyNo].kekuatan )
+					if enemyList[enemyNo].pertahanan < 1:
+						print(f"Musuh kita si {enemyList[enemyNo]} meninggal. Hamdalah. Walaupun ia musuh, jangan lupa disholati, sebab ia juga manusia seperti kita.")
+						print("LANJUTKAN PETUALANGAN INI")
+						enemyList[enemyNo].kekuatan = 100
+						battleState = 0
+
+						loot(enemyList[enemyNo])
+
+					else:
+						decision = int(input("1. Serang! \n2.Lihat isi tas. \n3. Kabur aja lah. Lagi males banget nih."))
+
+				else:
+					print("Salah nomor, kak. Coba isi dengan angka yang benar.")
+					attack = int(input("1. Gagang pohon \n2. Ilmu Gaib \n3. Omelan"))
+					x = attack - 1
 
 
 
@@ -218,7 +254,7 @@ inventoryWipe()
 print("\n \n \nKamu harus menjaga keamanan pasar dari serangan monster!\n \n \n")
 print("Tapi sebelumnya, siapa kah kamu? (isi dengan nomor pilihan) ")
 
-choice = int(input("1. Satpam Pasar \n2. Sopir Angkot \n3 Mbah Dukun. \nSaya pilih nomor... "))
+choice = int(input("1. Satpam Pasar \n2. Sopir Angkot \n3. Mbah Dukun. \nSaya pilih nomor... "))
 
 nama = str(input("Siapa nama kamu? "))
 
@@ -236,5 +272,6 @@ elif choice == 3:
 
 else:
 	print("Salah isi euy. Isi dengan nomor pilihan, 1, 2 atau 3. Yang pertama seorang Satpam Pasar, kedua adalah Sopir Angkot, yang terakhir, Mbah Dukun. Coba sekarang pilih lagi yang benar.")
-	choice = int(input("1. Satpam Pasar \n2. Sopir Angkot \n3 Mbah Dukun. \nSaya pilih nomor... "))
+	choice = int(input("1. Satpam Pasar \n2. Sopir Angkot \n3. Mbah Dukun. \nSaya pilih nomor... "))
 
+inventoryWipe()
